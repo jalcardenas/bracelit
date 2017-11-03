@@ -1,14 +1,36 @@
 <ion-header>
   <ion-navbar>
     <ion-title>
-      Ionic Blank
+      Bracelit
     </ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-content padding>
-  The world is your oyster.
-  <p>
-    If you get lost, the <a href="http://ionicframework.com/docs/v2">docs</a> will be your guide.
-  </p>
+  <div class="container">
+    <div class="row">
+      <div class="col-xs-12 col-sm-10 col-md-8 col-sm-offset-1 col-md-offset-2">
+        <form [formGroup]="signupForm" (ngSubmit)="onSubmit(username)">
+          <div class="form-group">
+            <label for="id">id</label>
+            <input
+              type="text"
+              id="id"
+              formControlName="id"
+              class="form-control">
+          </div>
+
+          <button class="btn btn-primary" type="submit">Entrar con pulsera</button>
+
+        </form>
+      </div>
+    </div>
+  </div>
+  <div class="container">
+    <div class="row">
+      <div class="col-xs-12 col-sm-10 col-md-8 col-sm-offset-1 col-md-offset-2">
+        <button class="btn btn-primary" type="submit" (click)="onClick()">Registrar pulsera</button>
+      </div>
+    </div>
+  </div>
 </ion-content>

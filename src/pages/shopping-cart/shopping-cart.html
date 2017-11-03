@@ -1,0 +1,48 @@
+<!--
+  Generated template for the ShoppingCartPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>shoppingCart</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <div class="row">
+    <div class="col-xs-12">
+      <a href="#" class="list-group item clearfix" *ngFor="let shoppingcartproduct of shoppingcart">
+        <div class="pull-left">
+          <h4 class="list-group-item-heading">{{ shoppingcartproduct.name}}</h4>
+        </div>
+        <span class="pull-right">
+          <p class="list-group-item-text">
+            {{shoppingcartproduct.price}} €            {{shoppingcartproduct.amount}} Unidades</p>
+        </span>
+      </a>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-12">
+      <a href="#" class="list-group item clearfix">
+        <div class="pull-center">
+          <h4 (click)="calculatePrice()">Precio: {{this.price}} €</h4>
+        </div>
+      </a>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-12">
+      <a href="#" class="list-group item clearfix">
+        <div class="pull-center">
+          <button class="btn btn-danger" (click)="payShoppingCart()">Pagar</button>
+        </div>
+      </a>
+    </div>
+  </div>
+</ion-content>
