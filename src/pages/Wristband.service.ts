@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage } from 'ionic-angular';
 import { Injectable } from '@angular/core';
 import 'rxjs/Rx';
 import { WristbandModel } from "./Wristband.model";
@@ -14,7 +14,7 @@ import { MenuPage } from "./menu/menu";
 @Injectable()
 export class WristbandService {
   wristbands: WristbandModel[]=[];
-  constructor(public navCtrl: NavController,public navParams: NavParams) {}
+  constructor() {}
 
 
   //Pulsera seleccionada se identifica con el id
@@ -63,9 +63,6 @@ export class WristbandService {
         this.wristbands[item].products=products;
         this.wristbands[item].amounts=amounts;
         this.selectWristband(id);
-        this.navCtrl.push(MenuPage,{
-
-        });
         console.log(this.wristbands[item]);
       }
     }

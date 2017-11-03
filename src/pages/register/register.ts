@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { WristbandService } from '../Wristband.service';
 import { FormControl, FormGroup } from "@angular/forms";
-import { MenuPage} from "../menu/menu";
+import { MenuPage } from "../menu/menu";
 
 /**
  * Generated class for the RegistrarPage page.
@@ -22,7 +22,7 @@ export class RegisterPage implements OnInit {
   signupForm : FormGroup;
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
-             private wristbandService: WristbandService
+            private wristbandService: WristbandService
               ) {
   }
   ngOnInit(){
