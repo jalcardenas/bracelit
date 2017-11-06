@@ -37,7 +37,6 @@ export class WristbandService {
     this.wristbands.push(new WristbandModel(username,id,money,age,bonds,products,amounts));
     console.log(this.wristbands[this.wristbands.length-1]);
     this.selectWristband(id);
-    this.storeWristband(this.getWristbands());
   }
 
   storeWristband(wristbands: WristbandModel[]) {

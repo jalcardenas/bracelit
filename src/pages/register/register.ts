@@ -36,6 +36,11 @@ export class RegisterPage implements OnInit {
    this.wristbandService.postWristband(this.signupForm.value.username,
       (Math.random() * (9999999999999999)).toString(),
       0,this.signupForm.value.edad,0,[],[]);
+   this.wristbandService.storeWristband(this.wristbandService.wristbands)
+     .subscribe(
+       (response) => console.log(response),
+       (error) => console.log(error)
+     );
     this.navCtrl.push(MenuPage,{
     });
     this.signupForm.reset();
