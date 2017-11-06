@@ -28,10 +28,9 @@ export class HomePage implements OnInit{
 
    });
   }
-  onSubmit(name:string){
-    this.wristbandservice.selectWristband(name);
+  onSubmit(id:string){
+    this.wristbandservice.selectWristband(id);
     this.navCtrl.push(MenuPage,{
-
    });
   }
 }

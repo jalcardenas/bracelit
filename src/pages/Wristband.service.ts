@@ -5,8 +5,7 @@ import 'rxjs/Rx';
 import { WristbandModel } from "./Wristband.model";
 import {ProductModel} from "./Product.model";
 import {Http, Headers, Response} from "@angular/http";
-
-
+import { Observable } from "rxjs/Observable";
 
 
 @Injectable()
@@ -49,6 +48,20 @@ export class WristbandService {
       {headers: headers});
   }
 
+  loadWristbands() {
+    return this.http.get('https://bracelit-f0d14.firebaseio.com/data.json')
+      .map(
+        (response: Response) => {
+          const data = response.json();
+          return data;
+        }
+      )
+      .catch(
+        (error: Response) => {
+          return Observable.throw('Something went wrong');
+        }
+      );
+  }
 
   patchWristband(id:string, money:number, bonds: number, products:ProductModel[], amounts:number[]){
    for (var item in this.wristbands) {
@@ -89,5 +102,9 @@ export class WristbandService {
         return this.wristbands[item].amounts;
       }
     }
+  }
+  setWristbands(wristbands: WristbandModel[]){
+    this.wristbands=wristbands;
+    console.log(this.wristbands);
   }
 }

@@ -3,6 +3,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { WristbandService } from '../Wristband.service';
 import { FormControl, FormGroup } from "@angular/forms";
 import { MenuPage } from "../menu/menu";
+import { Response} from "@angular/http";
 
 /**
  * Generated class for the RegistrarPage page.
@@ -31,6 +32,7 @@ export class RegisterPage implements OnInit {
       'edad': new FormControl(null),
       'gender': new FormControl('Male')
     })
+    this.onGet();
   }
   onSubmit(){
    this.wristbandService.postWristband(this.signupForm.value.username,
@@ -45,5 +47,11 @@ export class RegisterPage implements OnInit {
     });
     this.signupForm.reset();
   }
-
+  onGet(){
+    this.wristbandService.loadWristbands().
+    subscribe(
+      (wristbands: any[]) => this.wristbandService.setWristbands(wristbands),
+      (error) => console.log(error)
+    );
+  }
 }
