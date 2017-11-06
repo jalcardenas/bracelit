@@ -17,6 +17,7 @@ import { ShoppingCartService} from "../pages/ShoppingCart.service";
 import { RechargeBondsPage } from "../pages/recharge-bonds/recharge-bonds";
 import { BuyOffersPage } from "../pages/buy-offers/buy-offers";
 import {OffersService} from "../pages/Offers.service";
+import { HttpModule } from "@angular/http";
 
 @NgModule({
   declarations: [
@@ -33,7 +34,8 @@ import {OffersService} from "../pages/Offers.service";
   ],
   imports: [
     BrowserModule,
-    IonicModule.forRoot(MyApp)
+    IonicModule.forRoot(MyApp),
+    HttpModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [

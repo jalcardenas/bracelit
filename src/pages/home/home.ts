@@ -19,7 +19,7 @@ export class HomePage implements OnInit{
   }
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
-              //private wristbandservice: WristbandService
+              private wristbandservice: WristbandService
               ) {
 
   }
@@ -29,7 +29,7 @@ export class HomePage implements OnInit{
    });
   }
   onSubmit(name:string){
-    //this.wristbandservice.selectWristband(name);
+    this.wristbandservice.selectWristband(name);
     this.navCtrl.push(MenuPage,{
 
    });

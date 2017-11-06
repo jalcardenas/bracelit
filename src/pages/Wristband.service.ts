@@ -4,9 +4,7 @@ import { Injectable } from '@angular/core';
 import 'rxjs/Rx';
 import { WristbandModel } from "./Wristband.model";
 import {ProductModel} from "./Product.model";
-
-//import {Http, Headers, Response} from "@angular/http";
-import { MenuPage } from "./menu/menu";
+import {Http, Headers, Response} from "@angular/http";
 
 
 
@@ -14,7 +12,7 @@ import { MenuPage } from "./menu/menu";
 @Injectable()
 export class WristbandService {
   wristbands: WristbandModel[]=[];
-  constructor() {}
+  constructor(private http: Http) {}
 
 
   //Pulsera seleccionada se identifica con el id
@@ -39,20 +37,18 @@ export class WristbandService {
     this.wristbands.push(new WristbandModel(username,id,money,age,bonds,products,amounts));
     console.log(this.wristbands[this.wristbands.length-1]);
     this.selectWristband(id);
-   // this.storeWristband(this.getWristbands());
-
+    this.storeWristband(this.getWristbands());
   }
 
-  /*storeWristband(servers: any[]) {
+  storeWristband(wristbands: WristbandModel[]) {
     const headers = new Headers({'Content-Type': 'application/json'});
     // return this.http.post('https://udemy-ng-http.firebaseio.com/data.json',
     //   servers,
     //   {headers: headers});
     return this.http.put('https://bracelit-f0d14.firebaseio.com/data.json',
-      servers,
+      wristbands,
       {headers: headers});
-  }*/
-    //https://bracelit-f0d14.firebaseio.com/
+  }
 
 
   patchWristband(id:string, money:number, bonds: number, products:ProductModel[], amounts:number[]){
