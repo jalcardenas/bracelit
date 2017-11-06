@@ -36,6 +36,11 @@ export class WristbandService {
     this.wristbands.push(new WristbandModel(username,id,money,age,bonds,products,amounts));
     console.log(this.wristbands[this.wristbands.length-1]);
     this.selectWristband(id);
+    this.storeWristband(this.wristbands)
+      .subscribe(
+        (response) => console.log(response),
+        (error) => console.log(error)
+      );
   }
 
   storeWristband(wristbands: WristbandModel[]) {
@@ -46,6 +51,7 @@ export class WristbandService {
     return this.http.put('https://bracelit-f0d14.firebaseio.com/data.json',
       wristbands,
       {headers: headers});
+
   }
 
   loadWristbands() {
@@ -74,6 +80,11 @@ export class WristbandService {
         console.log(this.wristbands[item]);
       }
     }
+    this.storeWristband(this.wristbands)
+      .subscribe(
+        (response) => console.log(response),
+        (error) => console.log(error)
+      );
   }
   getMoneyWristband(id:string){
     for (var item in this.wristbands) {

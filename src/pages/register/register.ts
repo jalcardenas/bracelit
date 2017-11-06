@@ -23,7 +23,7 @@ export class RegisterPage implements OnInit {
   signupForm : FormGroup;
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
-            private wristbandService: WristbandService
+            private wristbandservice: WristbandService
               ) {
   }
   ngOnInit(){
@@ -32,26 +32,15 @@ export class RegisterPage implements OnInit {
       'edad': new FormControl(null),
       'gender': new FormControl('Male')
     })
-    this.onGet();
+
   }
   onSubmit(){
-   this.wristbandService.postWristband(this.signupForm.value.username,
+   this.wristbandservice.postWristband(this.signupForm.value.username,
       (Math.random() * (9999999999999999)).toString(),
       0,this.signupForm.value.edad,0,[],[]);
-   this.wristbandService.storeWristband(this.wristbandService.wristbands)
-     .subscribe(
-       (response) => console.log(response),
-       (error) => console.log(error)
-     );
     this.navCtrl.push(MenuPage,{
     });
     this.signupForm.reset();
   }
-  onGet(){
-    this.wristbandService.loadWristbands().
-    subscribe(
-      (wristbands: any[]) => this.wristbandService.setWristbands(wristbands),
-      (error) => console.log(error)
-    );
-  }
+
 }

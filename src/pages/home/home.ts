@@ -16,6 +16,7 @@ export class HomePage implements OnInit{
     this.signupForm = new FormGroup({
       'id': new FormControl(null),
     })
+    this.onGet();
   }
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
@@ -28,9 +29,16 @@ export class HomePage implements OnInit{
 
    });
   }
-  onSubmit(id:string){
-    this.wristbandservice.selectWristband(id);
+  onSubmit(){
+    this.wristbandservice.selectWristband(this.signupForm.value.id);
     this.navCtrl.push(MenuPage,{
    });
+  }
+  onGet(){
+    this.wristbandservice.loadWristbands().
+    subscribe(
+      (wristbands: any[]) => this.wristbandservice.setWristbands(wristbands),
+      (error) => console.log(error)
+    );
   }
 }
