@@ -36,6 +36,20 @@ export class ShoppingCartService {
 
     }
   }
+
+  patchShoppingCart(product: string, type: boolean){{
+    for (let item in this.shoppingcart) {
+      if (this.shoppingcart[item].name == this.shoppingcartproduct.name) {
+        if(type==true) {
+          this.shoppingcart[item].amount = this.shoppingcart[item].amount + 1;
+        }else{
+          this.shoppingcart[item].amount = this.shoppingcart[item].amount - 1;
+        }
+      }
+    }
+  }
+
+  }
   deleteShoppingCart(){
     this.shoppingcart = [];
   }

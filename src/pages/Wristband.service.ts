@@ -11,11 +11,14 @@ import { Observable } from "rxjs/Observable";
 @Injectable()
 export class WristbandService {
   wristbands: WristbandModel[]=[];
+  stored:boolean;
+  //Pulsera seleccionada se identifica con el id
+  wristbandselected: string;
+
   constructor(private http: Http) {}
 
 
-  //Pulsera seleccionada se identifica con el id
-  wristbandselected: string;
+
   selectWristband(id:string){
     for (var item in this.wristbands) {
       if(this.wristbands[item].id==id  ){
@@ -24,7 +27,15 @@ export class WristbandService {
       }
     }
   }
-
+  isWristbandStored(id:string){
+    this.stored=false;
+    for (var item in this.wristbands) {
+      if(this.wristbands[item].id==id  ){
+          this.stored=true;
+      }
+    }
+    return this.stored;
+  }
   getWristbands() {
     return this.wristbands;
   }
@@ -33,14 +44,26 @@ export class WristbandService {
   }
   postWristband(username: string, id:string, money:number, age:number,
                 bonds:number, products: ProductModel[], amounts: number[]){
-    this.wristbands.push(new WristbandModel(username,id,money,age,bonds,products,amounts));
-    console.log(this.wristbands[this.wristbands.length-1]);
-    this.selectWristband(id);
-    this.storeWristband(this.wristbands)
-      .subscribe(
-        (response) => console.log(response),
-        (error) => console.log(error)
-      );
+    if(this.wristbands=null) {
+      this.wristbands.push(new WristbandModel(username, id, money, age, bonds, products, amounts));
+      console.log(this.wristbands[this.wristbands.length - 1]);
+      this.selectWristband(id);
+      this.storeWristband(this.wristbands)
+        .subscribe(
+          (response) => console.log(response),
+          (error) => console.log(error)
+        );
+    }else{
+      this.wristbands=[];
+      this.wristbands[0]=new WristbandModel(username, id, money, age, bonds, products, amounts);
+      console.log(this.wristbands[this.wristbands.length - 1]);
+      this.selectWristband(id);
+      this.storeWristband(this.wristbands)
+        .subscribe(
+          (response) => console.log(response),
+          (error) => console.log(error)
+        );
+    }
   }
 
   storeWristband(wristbands: WristbandModel[]) {

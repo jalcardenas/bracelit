@@ -30,9 +30,12 @@ export class HomePage implements OnInit{
    });
   }
   onSubmit(){
-    this.wristbandservice.selectWristband(this.signupForm.value.id);
-    this.navCtrl.push(MenuPage,{
-   });
+    if(this.wristbandservice.isWristbandStored(this.signupForm.value.id)) {
+      this.wristbandservice.selectWristband(this.signupForm.value.id);
+      this.navCtrl.push(MenuPage, {});
+    }else{
+      alert('Pulsera no registrada!')
+    }
   }
   onGet(){
     this.wristbandservice.loadWristbands().

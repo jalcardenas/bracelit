@@ -8,6 +8,7 @@ import {WristbandService} from "../Wristband.service";
 import { MenuPage} from "../menu/menu";
 import {OffersService} from "../Offers.service";
 import {WristbandModel} from "../Wristband.model";
+import { OnInit} from "@angular/core";
 
 /**
  * Generated class for the ShoppingCartPage page.
@@ -21,14 +22,24 @@ import {WristbandModel} from "../Wristband.model";
   selector: 'page-shopping-cart',
   templateUrl: 'shopping-cart.html',
 })
-export class ShoppingCartPage {
+export class ShoppingCartPage implements OnInit{
 
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
              private shoppingcartservice: ShoppingCartService,
               private wristbandservice: WristbandService,
               private productsservice: ProductsService,
-              private offersservice: OffersService){  }
+              private offersservice: OffersService){
+
+  }
+
+
+  ngOnInit() {
+    this.calculatePrice();
+
+  }
+
+
 
   shoppingcart: ShoppingCartProduct[]= this.shoppingcartservice.getShoppingCart();
   productswristband: ProductModel[]=this.wristbandservice.getProductsWristband(
@@ -92,6 +103,13 @@ export class ShoppingCartPage {
       });
     }else{
       console.log("No money baby");
+    }
+  }
+  modifyShoppingCart(productname:string, type:boolean){
+    if(type==true){
+      this.shoppingcartservice.patchShoppingCart(productname, type);
+    }else{
+      this.shoppingcartservice.patchShoppingCart(productname, type);
     }
   }
 }
