@@ -39,7 +39,7 @@ export class ShoppingCartService {
 
   patchShoppingCart(product: string, type: boolean){{
     for (let item in this.shoppingcart) {
-      if (this.shoppingcart[item].name == this.shoppingcartproduct.name) {
+      if (this.shoppingcart[item].name == product) {
         if(type==true) {
           this.shoppingcart[item].amount = this.shoppingcart[item].amount + 1;
         }else{
