@@ -3,11 +3,11 @@ import {WorkersModel} from "./Workers.model";
 
 export class EventsModel{
   public name:string;
-  public id: number;
+  public id: string;
   public wristbands: WristbandModel[];
-  public workers: WorkersModel;
+  public workers: WorkersModel[];
 
-  constructor(name:string, id:number, wristbands: WristbandModel[], workers:WorkersModel){
+  constructor(name:string, id:string, wristbands: WristbandModel[], workers:WorkersModel[]){
     this.name= name;
     this.id=id;
     this.wristbands=wristbands;
