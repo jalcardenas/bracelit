@@ -3,7 +3,8 @@ import {NavController, NavParams} from 'ionic-angular';
 import { RegisterPage } from "../register/register";
 import { FormGroup, FormControl } from "@angular/forms";
 import { WristbandService } from "../Wristband.service";
-import { MenuPage } from "../menu/menu";
+import { CoverPage } from "../cover/cover";
+import {NewEventPage} from "../new-event/new-event";
 
 @Component({
   selector: 'page-home',
@@ -16,32 +17,21 @@ export class HomePage implements OnInit{
     this.signupForm = new FormGroup({
       'id': new FormControl(null),
     })
-    this.onGet();
   }
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
-              private wristbandservice: WristbandService
               ) {
 
   }
   onClick(){
-    this.navCtrl.push(RegisterPage,{
+    this.navCtrl.push(NewEventPage,{
 
    });
   }
   onSubmit(){
-    if(this.wristbandservice.isWristbandStored(this.signupForm.value.id)) {
-      this.wristbandservice.selectWristband(this.signupForm.value.id);
-      this.navCtrl.push(MenuPage, {});
-    }else{
-      alert('Pulsera no registrada!')
-    }
+    this.navCtrl.push(CoverPage,{
+
+    });
   }
-  onGet(){
-    this.wristbandservice.loadWristbands().
-    subscribe(
-      (wristbands: any[]) => this.wristbandservice.setWristbands(wristbands),
-      (error) => console.log(error)
-    );
-  }
+
 }

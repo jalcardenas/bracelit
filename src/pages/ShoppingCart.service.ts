@@ -37,19 +37,29 @@ export class ShoppingCartService {
     }
   }
 
-  patchShoppingCart(product: string, type: boolean){{
+  patchShoppingCart(product: string, type: boolean){
     for (let item in this.shoppingcart) {
       if (this.shoppingcart[item].name == product) {
         if(type==true) {
           this.shoppingcart[item].amount = this.shoppingcart[item].amount + 1;
         }else{
-          this.shoppingcart[item].amount = this.shoppingcart[item].amount - 1;
+          if(this.shoppingcart[item].amount==0){
+            this.deleteShoppingCartProduct(product);
+          }else {
+            this.shoppingcart[item].amount = this.shoppingcart[item].amount - 1;
+          }
         }
       }
     }
   }
-
+  deleteShoppingCartProduct(product: string){
+    for (let item1 in this.shoppingcart) {
+      if (this.shoppingcart[item1].name == product) {
+        this.shoppingcart.splice(parseInt(item1),1);
+      }
+    }
   }
+
   deleteShoppingCart(){
     this.shoppingcart = [];
   }

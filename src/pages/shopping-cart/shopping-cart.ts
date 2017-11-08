@@ -111,5 +111,6 @@ export class ShoppingCartPage implements OnInit{
     }else{
       this.shoppingcartservice.patchShoppingCart(productname, type);
     }
+    this.calculatePrice();
   }
 }

@@ -18,6 +18,8 @@ import { RechargeBondsPage } from "../pages/recharge-bonds/recharge-bonds";
 import { BuyOffersPage } from "../pages/buy-offers/buy-offers";
 import {OffersService} from "../pages/Offers.service";
 import { HttpModule } from "@angular/http";
+import { CoverPage} from "../pages/cover/cover";
+import {NewEventPage} from "../pages/new-event/new-event";
 
 @NgModule({
   declarations: [
@@ -30,7 +32,9 @@ import { HttpModule } from "@angular/http";
     ReturnPage,
     ShoppingCartPage,
     RechargeBondsPage,
-    BuyOffersPage
+    BuyOffersPage,
+    CoverPage,
+    NewEventPage
   ],
   imports: [
     BrowserModule,
@@ -48,7 +52,9 @@ import { HttpModule } from "@angular/http";
     ReturnPage,
     ShoppingCartPage,
     RechargeBondsPage,
-    BuyOffersPage
+    BuyOffersPage,
+    CoverPage,
+    NewEventPage
   ],
   providers: [
     StatusBar,
