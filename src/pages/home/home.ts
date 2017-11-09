@@ -33,6 +33,7 @@ export class HomePage implements OnInit{
    });
   }
   onSubmit(){
+    if(this.eventsservice.isEventStored(this.signupForm.value.id)){
     this.eventsservice.selectEvent(this.signupForm.value.id);
     this.wristbandservice.setWristbands(this.eventsservice.getWristbands());
     console.log(this.eventsservice.getWristbands());
@@ -41,7 +42,11 @@ export class HomePage implements OnInit{
     this.navCtrl.push(CoverPage,{
 
     });
+    }else{
+       alert('Evento no registrado!');
   }
+}
+
   onGet(){
    this.eventsservice.loadEvents().
     subscribe(
