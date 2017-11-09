@@ -5,6 +5,7 @@ import { FormControl, FormGroup } from "@angular/forms";
 import { MenuPage } from "../menu/menu";
 import { Response} from "@angular/http";
 import {CoverPage} from "../cover/cover";
+import {EventsService} from "../Events.service";
 
 /**
  * Generated class for the RegistrarPage page.
@@ -23,6 +24,7 @@ export class NewEventPage implements OnInit {
   signupForm : FormGroup;
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
+              private eventsservice: EventsService
   ) {
   }
   ngOnInit(){
@@ -33,6 +35,7 @@ export class NewEventPage implements OnInit {
 
   }
   onSubmit(){
+    this.eventsservice.postEvent(this.signupForm.value.name,this.signupForm.value.id);
     this.navCtrl.push(CoverPage,{
     });
     this.signupForm.reset();

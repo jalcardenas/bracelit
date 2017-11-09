@@ -20,6 +20,7 @@ import {OffersService} from "../pages/Offers.service";
 import { HttpModule } from "@angular/http";
 import { CoverPage} from "../pages/cover/cover";
 import {NewEventPage} from "../pages/new-event/new-event";
+import { EventsService} from "../pages/Events.service";
 
 @NgModule({
   declarations: [
@@ -54,7 +55,8 @@ import {NewEventPage} from "../pages/new-event/new-event";
     RechargeBondsPage,
     BuyOffersPage,
     CoverPage,
-    NewEventPage
+    NewEventPage,
+
   ],
   providers: [
     StatusBar,
@@ -63,7 +65,8 @@ import {NewEventPage} from "../pages/new-event/new-event";
     WristbandService,
     ProductsService,
     ShoppingCartService,
-    OffersService
+    OffersService,
+    EventsService
 
   ]
 })

@@ -16,7 +16,7 @@ export class CoverPage implements OnInit{
     this.signupForm = new FormGroup({
       'id': new FormControl(null),
     })
-    this.onGet();
+
   }
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
@@ -36,12 +36,5 @@ export class CoverPage implements OnInit{
     }else{
       alert('Pulsera no registrada!')
     }
-  }
-  onGet(){
-    this.wristbandservice.loadWristbands().
-    subscribe(
-      (wristbands: any[]) => this.wristbandservice.setWristbands(wristbands),
-      (error) => console.log(error)
-    );
   }
 }

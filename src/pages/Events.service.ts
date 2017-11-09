@@ -3,11 +3,11 @@ import { IonicPage } from 'ionic-angular';
 import { Injectable } from '@angular/core';
 import 'rxjs/Rx';
 import { WristbandModel } from "./Wristband.model";
-import {ProductModel} from "./Product.model";
 import {Http, Headers, Response} from "@angular/http";
 import { Observable } from "rxjs/Observable";
 import {EventsModel} from "./Events.model";
 import {WorkersModel} from "./Workers.model";
+import {WristbandService} from "./Wristband.service";
 
 
 @Injectable()
@@ -17,7 +17,9 @@ export class EventsService {
   //Evento seleccionada se identifica con el id
   eventselected: string;
 
-  constructor(private http: Http) {}
+  constructor(private http: Http,
+
+  ) {}
 
 
 
@@ -26,6 +28,7 @@ export class EventsService {
       if(this.events[item].id==id  ){
         this.eventselected=id;
         console.log("Seleccionado evento: " + this.eventselected);
+        //Meter un servicio dentro de otro y fijar aqui las pulseras.
       }
     }
   }
@@ -93,10 +96,10 @@ export class EventsService {
       );
   }
 
-  addWristbandEvent(id:string, wristband: WristbandModel ){
+  addWristbandEvent(id:string, wristbands: WristbandModel[] ){
     for (var item in this.events) {
       if(this.events[item].id==id  ){
-        this.events[item].wristbands.push(wristband);
+        this.events[item].wristbands=wristbands;
         this.selectEvent(id);
         console.log(this.events[item]);
       }
@@ -120,5 +123,17 @@ export class EventsService {
         (response) => console.log(response),
         (error) => console.log(error)
       );
+  }
+  setEvents(events: EventsModel[]){
+    this.events=events;
+    console.log(this.events);
+  }
+  getWristbands(){
+    for (var item in this.events) {
+      if(this.events[item].id==this.getSelectedEvent()){
+        return this.events[item].wristbands;
+      }
+    }
+
   }
 }
