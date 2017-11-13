@@ -88,34 +88,36 @@ export class ShoppingCartPage implements OnInit{
 
     //Bonos (por orden)
     for (let item1 in this.shoppingcart) {
-      this.offerproduct = false;
+      //this.offerproduct = false;
       for (let item2 in this.discountedofferproducts) {
         if (this.shoppingcart[item1].name == this.discountedofferproducts[item2].name) {
-          this.offerproduct = true;
-        }
-        if ((this.shoppingcart[item1].amount > this.discountedofferproducts[item2].amount) && (this.offerproduct)) {
-          if (((this.shoppingcart[item1].amount
-              - this.discountedofferproducts[item2].amount)
-              * this.shoppingcart[item1].bonds) < this.nBonds) {
-            console.log(this.shoppingcart[item1].name);
-            console.log(this.discountedofferproducts[item2].name);
+         // this.offerproduct = true;
+        //}
+          if ((this.shoppingcart[item1].amount > this.discountedofferproducts[item2].amount)){ //&& (this.offerproduct)) {
+            if (((this.shoppingcart[item1].amount
+                - this.discountedofferproducts[item2].amount)
+                * this.shoppingcart[item1].bonds) < this.nBonds) {
+              console.log(this.shoppingcart[item1].name);
+              console.log(this.discountedofferproducts[item2].name);
 
-            this.discountedbondsproducts[this.indexbonds] = JSON.parse(JSON.stringify(this.shoppingcart[item1]));
+              this.discountedbondsproducts[this.indexbonds] = JSON.parse(JSON.stringify(this.shoppingcart[item1]));
 
-            this.discountedbondsproducts[this.indexbonds].amount =
-              this.shoppingcart[item1].amount - this.discountedofferproducts[item2].amount;
-            this.indexbonds = this.indexbonds + 1;
-          } else {
+              this.discountedbondsproducts[this.indexbonds].amount =
+                this.shoppingcart[item1].amount - this.discountedofferproducts[item2].amount;
+              this.indexbonds = this.indexbonds + 1;
+            } else {
 
-            this.discountedbondsproducts[this.indexbonds] = JSON.parse(JSON.stringify(this.shoppingcart[item1]));
+              this.discountedbondsproducts[this.indexbonds] = JSON.parse(JSON.stringify(this.shoppingcart[item1]));
 
-            this.discountedbondsproducts[this.indexbonds].amount =
-              this.nBonds / this.shoppingcart[item1].bonds;
-            this.indexbonds = this.indexbonds + 1;
+              this.discountedbondsproducts[this.indexbonds].amount =
+                this.nBonds / this.shoppingcart[item1].bonds;
+              this.indexbonds = this.indexbonds + 1;
 
+            }
           }
         }
       }
+
     }
     //Precio final
     for(let item1 in this.discountedofferproducts){
