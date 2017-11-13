@@ -23,7 +23,7 @@ export class ProductsListPage {
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
               private productsService: ProductsService,
-              private shoppingcart:ShoppingCartService) {
+              private shoppingcartservice:ShoppingCartService) {
 
   }
   products: ProductModel[] = this.productsService.getProducts();
@@ -34,6 +34,6 @@ export class ProductsListPage {
     });
   }
   addProduct(name:string, price:number, nbonds:number){
-    this.shoppingcart.postShoppingCart(name, price, nbonds);
+    this.shoppingcartservice.postShoppingCart(name, price, nbonds);
   }
 }

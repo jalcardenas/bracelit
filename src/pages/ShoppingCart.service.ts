@@ -13,7 +13,7 @@ export class ShoppingCartService {
   ];
   shoppingcartproduct: ShoppingCartProduct;
   productin: boolean=false;
-
+  price:number=0;
   getShoppingCart() {
     return this.shoppingcart;
   }
@@ -30,11 +30,10 @@ export class ShoppingCartService {
           this.productin=true;
         } else if ((this.shoppingcart.length==(+item+1)&&(this.productin==false))) {
           this.shoppingcart.push(this.shoppingcartproduct);
-          console.log(this.shoppingcart[this.shoppingcart.length-1]);
         }
       }
-
     }
+    console.log(this.shoppingcart);
   }
 
   patchShoppingCart(product: string, type: boolean){
@@ -62,6 +61,17 @@ export class ShoppingCartService {
 
   deleteShoppingCart(){
     this.shoppingcart = [];
+  }
+
+  calculatePrice(){
+    this.price=0;
+    for(let item1 in this.shoppingcart){
+      this.price=this.price+this.shoppingcart[item1].price*this.shoppingcart[item1].amount;
+    }
+  }
+  getPrice(){
+    this.calculatePrice();
+    return this.price;
   }
   //patchProducts(id:string, money:number){
   // for (var item in this.pulseras) {
