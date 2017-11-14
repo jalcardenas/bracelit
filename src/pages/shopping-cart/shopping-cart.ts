@@ -9,6 +9,7 @@ import { MenuPage} from "../menu/menu";
 import {OffersService} from "../Offers.service";
 import {WristbandModel} from "../Wristband.model";
 import { OnInit} from "@angular/core";
+import {CoverPage} from "../cover/cover";
 
 /**
  * Generated class for the ShoppingCartPage page.
@@ -59,13 +60,13 @@ export class ShoppingCartPage implements OnInit{
   discountedbonds:number;
   indexoffers:number;
   indexbonds:number;
-  offerproduct:boolean;
+  offerproduct:boolean[]=[];
 
   calculatePrice() {
     this.price = this.shoppingcartservice.getPrice();
     this.indexoffers = 0;
     this.indexbonds = 0;
-
+    this.discountedbonds=0;
     //OFERTAS
     for (let item1 in this.shoppingcart) {
       for (let item2 in this.productswristband) {
@@ -88,102 +89,71 @@ export class ShoppingCartPage implements OnInit{
 
     //Bonos (por orden)
     for (let item1 in this.shoppingcart) {
-      //this.offerproduct = false;
+      this.offerproduct[item1] = false;
       for (let item2 in this.discountedofferproducts) {
         if (this.shoppingcart[item1].name == this.discountedofferproducts[item2].name) {
-         // this.offerproduct = true;
+          this.offerproduct[item1] = true;
         //}
           if ((this.shoppingcart[item1].amount > this.discountedofferproducts[item2].amount)){ //&& (this.offerproduct)) {
             if (((this.shoppingcart[item1].amount
                 - this.discountedofferproducts[item2].amount)
-                * this.shoppingcart[item1].bonds) < this.nBonds) {
-              console.log(this.shoppingcart[item1].name);
-              console.log(this.discountedofferproducts[item2].name);
-
+                * this.shoppingcart[item1].bonds) <= (this.nBonds-this.discountedbonds)) {
               this.discountedbondsproducts[this.indexbonds] = JSON.parse(JSON.stringify(this.shoppingcart[item1]));
-
               this.discountedbondsproducts[this.indexbonds].amount =
                 this.shoppingcart[item1].amount - this.discountedofferproducts[item2].amount;
+              this.discountedbonds=this.discountedbonds+this.discountedbondsproducts[this.indexbonds].bonds*
+                this.discountedbondsproducts[this.indexbonds].amount;
               this.indexbonds = this.indexbonds + 1;
-            } else {
-
+            } else if(this.nBonds>=this.discountedbonds) {
               this.discountedbondsproducts[this.indexbonds] = JSON.parse(JSON.stringify(this.shoppingcart[item1]));
+                this.discountedbondsproducts[this.indexbonds].amount =
+                  (this.nBonds - this.discountedbonds) / this.shoppingcart[item1].bonds;
+                this.discountedbonds = this.discountedbonds + this.discountedbondsproducts[this.indexbonds].bonds *
+                  this.discountedbondsproducts[this.indexbonds].amount;
 
-              this.discountedbondsproducts[this.indexbonds].amount =
-                this.nBonds / this.shoppingcart[item1].bonds;
-              this.indexbonds = this.indexbonds + 1;
+                this.indexbonds = this.indexbonds + 1;
 
             }
           }
         }
       }
-
+      for(let item1 in this.shoppingcart) {
+        if (((this.shoppingcart[item1].amount
+            * this.shoppingcart[item1].bonds) <= (this.nBonds - this.discountedbonds)) && (this.offerproduct[item1] == false)) {
+          this.discountedbondsproducts[this.indexbonds] = JSON.parse(JSON.stringify(this.shoppingcart[item1]));
+          this.discountedbonds = this.discountedbonds + this.discountedbondsproducts[this.indexbonds].bonds *
+            this.discountedbondsproducts[this.indexbonds].amount;
+          this.indexbonds = this.indexbonds + 1;
+        } else if ((this.nBonds >= this.discountedbonds) && (this.offerproduct[item1]==false)) {
+          this.discountedbondsproducts[this.indexbonds] = JSON.parse(JSON.stringify(this.shoppingcart[item1]));
+          this.discountedbondsproducts[this.indexbonds].amount =
+            ~~((this.nBonds - this.discountedbonds) / this.shoppingcart[item1].bonds);
+          this.discountedbonds = this.discountedbonds + this.discountedbondsproducts[this.indexbonds].bonds *
+            this.discountedbondsproducts[this.indexbonds].amount;
+          this.indexbonds = this.indexbonds + 1;
+        }
+      }
     }
     //Precio final
     for(let item1 in this.discountedofferproducts){
       this.price=this.price-this.discountedofferproducts[item1].amount
         *this.discountedofferproducts[item1].price;
     }
-    console.log("Precio ofertas: " + this.price);
-    console.log(this.discountedbondsproducts);
     for(let item1 in this.discountedbondsproducts){
       this.price=this.price-this.discountedbondsproducts[item1].amount
         *this.discountedbondsproducts[item1].price;
-      console.log("Precio bonos: " + this.price);
     }
   }
-  /*calculatePrice(){
-    this.price=0;
-    //OFERTAS
-    for (let item1 in this.shoppingcart) {
-      for(let item2 in this.productswristband) {
-        if(this.shoppingcart[item1].name==this.productswristband[item2].name){
-          /*if(this.shoppingcart[item1].amount<=this.amountswristband[item2]){
-            //this.shoppingcart[item1].amount=this.shoppingcart[item1].amount-this.amountswristband[item2];
-            //this.amountswristband[item2]=0;
-            this.discountedproducts[this.index]=this.shoppingcart[item1];
-            this.index=this.index+1;
-            this.amountswristband[item2]=this.amountswristband[item2]-this.shoppingcart[item1].amount;
-          }else{
-            //this.amountswristband[item2]=this.amountswristband[item2]-this.shoppingcart[item1].amount;
-            //this.shoppingcart[item1].amount=0;
-            this.discountedproducts[this.index]=this.shoppingcart[item1];
-            this.discountedproducts[this.index].amount=this.amountswristband[item2];
-            this.index=this.index+1;
-            this.amountswristband[item2]=0;
-        }
-      }
-    }*/
 
-    //Bonos (por orden)
-  /*  for(let item1 in this.shoppingcart) {
-      if (this.shoppingcart[item1].bonds <= this.nBonds) {
-        this.nBonds = this.nBonds - this.shoppingcart[item1].bonds;
-        this.shoppingcart[item1].price = 0;
-      }
-    }
-    //Precio final
-    for(let item1 in this.shoppingcart) {
-      this.price = this.price + this.shoppingcart[item1].price * this.shoppingcart[item1].amount;
-      console.log('Sin descuento ' + this.price )
-    }
-    for(let item1 in this.discountedproducts){
-        this.price=this.price-this.discountedproducts[item1].amount*this.discountedproducts[item1].price;
-    }
-
-
-
-
-  }*/
 
 
   payShoppingCart(){
     //En realidad no sé si se puede llegar aquí sin funcionar con selectedWristband
-    this.discountedbonds=0;
-    for(let item1 in this.discountedbondsproducts){
-      this.discountedbonds=this.discountedbonds+this.discountedbondsproducts[item1].bonds*
-        this.discountedbondsproducts[item1].amount;
-    }
+    //this.discountedbonds=0;
+    //for(let item1 in this.discountedbondsproducts){
+     // this.discountedbonds=this.discountedbonds+this.discountedbondsproducts[item1].bonds*
+      //  this.discountedbondsproducts[item1].amount;
+    //}
     for(let item1 in this.discountedofferproducts){
       for(let item2 in this.productswristband){
         if(this.discountedofferproducts[item1].name==this.productswristband[item2].name){
@@ -205,7 +175,7 @@ export class ShoppingCartPage implements OnInit{
       console.log("Compra realizada correctamente");
       this.shoppingcartservice.deleteShoppingCart();
       this.price=0;
-      this.navCtrl.push(MenuPage,{
+      this.navCtrl.push(CoverPage,{
       });
     }else{
       console.log("No money baby");
