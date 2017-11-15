@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import {NavController, NavParams} from 'ionic-angular';
-import { RegisterPage } from "../register/register";
 import { FormGroup, FormControl } from "@angular/forms";
 import { WristbandService } from "../Wristband.service";
 import { CoverPage } from "../cover/cover";
@@ -37,10 +36,7 @@ export class HomePage implements OnInit{
     this.eventsservice.selectEvent(this.signupForm.value.id);
     this.wristbandservice.setWristbands(this.eventsservice.getWristbands());
     console.log(this.eventsservice.getWristbands());
-    //////////////////////////////////selecciono el evento y a ver si asocia ///
-    //Cuando selecciono evento se guardan las pulserras que registro pero no lee las anteriores
-    this.navCtrl.push(CoverPage,{
-
+        this.navCtrl.push(CoverPage,{
     });
     }else{
        alert('Evento no registrado!');

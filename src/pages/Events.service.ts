@@ -1,5 +1,3 @@
-import { Component } from '@angular/core';
-import { IonicPage } from 'ionic-angular';
 import { Injectable } from '@angular/core';
 import 'rxjs/Rx';
 import { WristbandModel } from "./Wristband.model";
@@ -7,7 +5,6 @@ import {Http, Headers, Response} from "@angular/http";
 import { Observable } from "rxjs/Observable";
 import {EventsModel} from "./Events.model";
 import {WorkersModel} from "./Workers.model";
-import {WristbandService} from "./Wristband.service";
 
 
 @Injectable()

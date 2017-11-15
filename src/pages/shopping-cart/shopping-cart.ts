@@ -2,12 +2,8 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { ShoppingCartService } from "../ShoppingCart.service";
 import { ShoppingCartProduct} from "../ShoppingCartProduct.model";
-import {ProductsService} from "../Products.service";
 import {ProductModel} from "../Product.model";
 import {WristbandService} from "../Wristband.service";
-import { MenuPage} from "../menu/menu";
-import {OffersService} from "../Offers.service";
-import {WristbandModel} from "../Wristband.model";
 import { OnInit} from "@angular/core";
 import {CoverPage} from "../cover/cover";
 
@@ -28,9 +24,7 @@ export class ShoppingCartPage implements OnInit{
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
              private shoppingcartservice: ShoppingCartService,
-              private wristbandservice: WristbandService,
-              private productsservice: ProductsService,
-              private offersservice: OffersService){
+              private wristbandservice: WristbandService){
 
   }
 
@@ -39,16 +33,7 @@ export class ShoppingCartPage implements OnInit{
   amountswristband: number[];
   nBonds:number;
   ngOnInit() {
-
-    this.shoppingcart= this.shoppingcartservice.getShoppingCart();
-    this.productswristband=this.wristbandservice.getProductsWristband(
-      this.wristbandservice.getSelectedWristband());
-    this.amountswristband=this.wristbandservice.getAmountsWristband(
-      this.wristbandservice.getSelectedWristband());
-    this.nBonds=this.wristbandservice.getBondsWristband(
-      this.wristbandservice.getSelectedWristband()
-    );
-    this.calculatePrice();
+    this.initialization();
   }
 
 
@@ -61,6 +46,24 @@ export class ShoppingCartPage implements OnInit{
   indexoffers:number;
   indexbonds:number;
   offerproduct:boolean[]=[];
+
+  initialization(){
+    this.shoppingcart= this.shoppingcartservice.getShoppingCart();
+    this.productswristband=this.wristbandservice.getProductsWristband(
+      this.wristbandservice.getSelectedWristband());
+    this.amountswristband=this.wristbandservice.getAmountsWristband(
+      this.wristbandservice.getSelectedWristband());
+    this.nBonds=this.wristbandservice.getBondsWristband(
+      this.wristbandservice.getSelectedWristband()
+    );
+    this.discountedbondsproducts=[];
+    this.discountedbonds=0;
+    this.discountedofferproducts=[];
+    this.indexbonds=0;
+    this.indexoffers=0;
+    this.offerproduct=[];
+    this.calculatePrice();
+  }
 
   calculatePrice() {
     this.price = this.shoppingcartservice.getPrice();
@@ -76,7 +79,7 @@ export class ShoppingCartPage implements OnInit{
             this.indexoffers = this.indexoffers + 1;
             //esto habría que hacerlo cuando se confirme la compra
             //this.amountswristband[item2]=this.amountswristband[item2]-this.shoppingcart[item1].amount;
-          } else {
+          } else if(this.amountswristband[item2]>0){
 
             this.discountedofferproducts[this.indexoffers]=JSON.parse(JSON.stringify(this.shoppingcart[item1]));
             this.discountedofferproducts[this.indexoffers].amount = this.amountswristband[item2];
@@ -110,7 +113,6 @@ export class ShoppingCartPage implements OnInit{
                   (this.nBonds - this.discountedbonds) / this.shoppingcart[item1].bonds;
                 this.discountedbonds = this.discountedbonds + this.discountedbondsproducts[this.indexbonds].bonds *
                   this.discountedbondsproducts[this.indexbonds].amount;
-
                 this.indexbonds = this.indexbonds + 1;
 
             }
@@ -187,6 +189,6 @@ export class ShoppingCartPage implements OnInit{
     }else{
       this.shoppingcartservice.patchShoppingCart(productname, type);
     }
-    this.calculatePrice();
+    this.initialization();
   }
 }

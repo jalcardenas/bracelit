@@ -3,7 +3,6 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { WristbandService } from '../Wristband.service';
 import { FormControl, FormGroup } from "@angular/forms";
 import { MenuPage } from "../menu/menu";
-import { Response} from "@angular/http";
 
 /**
  * Generated class for the RegistrarPage page.

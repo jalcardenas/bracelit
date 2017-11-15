@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import 'rxjs/Rx';
 import { WristbandModel } from "./Wristband.model";
 import {ProductModel} from "./Product.model";
-import {Http, Headers, Response} from "@angular/http";
+import {Http, Response} from "@angular/http";
 import { Observable } from "rxjs/Observable";
 import {EventsService} from "./Events.service";
 
