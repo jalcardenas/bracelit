@@ -5,7 +5,7 @@ import { ProductModel } from "./Product.model";
 
 @Injectable()
 export class ProductsService {
-  products: ProductModel[] = [
+  /*products: ProductModel[] = [
     new ProductModel('Coca Cola',1000,'../../assets/imgs/cocacola.jpg',2,1),
     new ProductModel('Pepsi Cola',666,'../../assets/imgs/cocacola.jpg',1,1),
     new ProductModel('Fanta',66,'../../assets/imgs/cocacola.jpg',1.5,2),
@@ -17,6 +17,8 @@ export class ProductsService {
   getProducts() {
     return this.products;
   }
+*/
+
   //postProducts(username: string, id:string, money:number, age:number){
   // this.productos.push(new Productos(username,id,money,age));
   //}

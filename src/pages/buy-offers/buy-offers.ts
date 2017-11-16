@@ -6,6 +6,7 @@ import { ShoppingCartPage} from "../shopping-cart/shopping-cart";
 import {OffersModel} from "../Offers.module";
 import { OffersService } from "../Offers.service";
 import {WristbandService} from "../Wristband.service";
+import {EventsService} from "../Events.service";
 
 /**
  * Generated class for the BuyOffersPage page.
@@ -23,11 +24,11 @@ export class BuyOffersPage {
 
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
-              private offersService: OffersService,
+              private eventsservice: EventsService,
               private shoppingcart:ShoppingCartService,
               private wristbandservice: WristbandService) {
   }
-  offers: OffersModel[] = this.offersService.getOffers();
+  offers: OffersModel[] = this.eventsservice.getOffers();
   products: ProductModel[];
   amounts: number[];
   new: boolean=false;

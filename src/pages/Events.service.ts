@@ -5,6 +5,8 @@ import {Http, Headers, Response} from "@angular/http";
 import { Observable } from "rxjs/Observable";
 import {EventsModel} from "./Events.model";
 import {WorkersModel} from "./Workers.model";
+import {ProductModel} from "./Product.model";
+import {OffersModel} from "./Offers.module";
 
 
 @Injectable()
@@ -45,8 +47,8 @@ export class EventsService {
     return this.eventselected;
   }
   postEvent(name: string, id:string){
-    if(this.events=null) {
-      this.events.push(new EventsModel(name,id,[],[]));
+    if(this.events!=null) {
+      this.events.push(new EventsModel(name,id,[],[],[],[]));
       console.log(this.events[this.events.length - 1]);
       this.selectEvent(id);
       this.storeEvents(this.events)
@@ -56,7 +58,7 @@ export class EventsService {
         );
     }else{
       this.events=[];
-      this.events[0]=new EventsModel(name, id, [],[]);
+      this.events[0]=new EventsModel(name, id, [],[],[],[]);
       console.log(this.events[this.events.length - 1]);
       this.selectEvent(id);
       this.storeEvents(this.events)
@@ -97,7 +99,9 @@ export class EventsService {
     for (var item in this.events) {
       if(this.events[item].id==id  ){
         this.events[item].wristbands=wristbands;
+        //Creo que esto sobra COMPROBAR
         this.selectEvent(id);
+        //
         console.log(this.events[item]);
       }
     }
@@ -131,6 +135,60 @@ export class EventsService {
         return this.events[item].wristbands;
       }
     }
+
+  }
+
+  getProducts(){
+    for (var item in this.events) {
+      if(this.events[item].id==this.getSelectedEvent()){
+        return this.events[item].menu;
+      }
+    }
+  }
+
+  addProductEvent(id: string, menuproduct: ProductModel){
+      for (var item in this.events) {
+        if(this.events[item].id==id  ){
+          if(this.events[item].menu!=null) {
+            this.events[item].menu.push(menuproduct);
+          }else{
+            this.events[item].menu=[];
+            this.events[item].menu[0]=menuproduct;
+          }
+        }
+      }
+      this.storeEvents(this.events)
+        .subscribe(
+          (response) => console.log(response),
+          (error) => console.log(error)
+        );
+
+  }
+
+  getOffers(){
+    for (var item in this.events) {
+      if(this.events[item].id==this.getSelectedEvent()){
+        return this.events[item].offers;
+      }
+    }
+  }
+
+  addOfferEvent(id: string, offer:OffersModel){
+    for (var item in this.events) {
+      if(this.events[item].id==id  ){
+        if(this.events[item].offers!=null) {
+          this.events[item].offers.push(offer);
+        }else{
+          this.events[item].offers=[];
+          this.events[item].offers[0]=offer;
+        }
+      }
+    }
+    this.storeEvents(this.events)
+      .subscribe(
+        (response) => console.log(response),
+        (error) => console.log(error)
+      );
 
   }
 }

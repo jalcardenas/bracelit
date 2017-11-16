@@ -4,6 +4,7 @@ import { ProductModel } from "../Product.model";
 import { ProductsService } from "../Products.service";
 import { ShoppingCartPage } from "../shopping-cart/shopping-cart";
 import { ShoppingCartService } from "../ShoppingCart.service";
+import {EventsService} from "../Events.service";
 
 /**
  * Generated class for the ProductoslistPage page.
@@ -23,10 +24,11 @@ export class ProductsListPage {
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
               private productsService: ProductsService,
-              private shoppingcartservice:ShoppingCartService) {
+              private shoppingcartservice:ShoppingCartService,
+              private eventsservice:EventsService) {
 
   }
-  products: ProductModel[] = this.productsService.getProducts();
+  products: ProductModel[] = this.eventsservice.getProducts();
 
   onClick(){
     this.navCtrl.push(ShoppingCartPage,{

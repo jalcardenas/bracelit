@@ -41,15 +41,15 @@ export class WristbandService {
     return this.wristbandselected;
   }
   postWristband(username: string, id:string, money:number, age:number,
-                bonds:number, products: ProductModel[], amounts: number[]){
+                bonds:number, products: ProductModel[], amounts: number[], shoppingcart: ProductModel[]){
     console.log(this.wristbands);
     if(this.wristbands==null) {
       this.wristbands=[];
-      this.wristbands[0]=new WristbandModel(username, id, money, age, bonds, products, amounts);
+      this.wristbands[0]=new WristbandModel(username, id, money, age, bonds, products, amounts,shoppingcart);
       this.selectWristband(id);
       this.storeWristband(this.wristbands);
     }else{
-      this.wristbands.push(new WristbandModel(username, id, money, age, bonds, products, amounts));
+      this.wristbands.push(new WristbandModel(username, id, money, age, bonds, products, amounts,shoppingcart));
       this.selectWristband(id);
       this.storeWristband(this.wristbands);
     }

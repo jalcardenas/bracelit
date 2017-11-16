@@ -8,10 +8,11 @@ export class WristbandModel{
   public bonds: number;
   public products: ProductModel[];
   public amounts: number[];
+  public shoppingcart: ProductModel[];
 
   constructor(name:string, id: string, money: number,
               age: number, bonds:number, products: ProductModel[],
-              amounts: number[]){
+              amounts: number[], shoppingcart: ProductModel[]){
     this.name= name;
     this.id=id;
     this.money=money;
@@ -19,5 +20,6 @@ export class WristbandModel{
     this.bonds = bonds;
     this.products = products;
     this.amounts=amounts;
+    this.shoppingcart=shoppingcart;
   }
 }

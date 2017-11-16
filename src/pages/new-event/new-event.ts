@@ -3,6 +3,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { FormControl, FormGroup } from "@angular/forms";
 import {CoverPage} from "../cover/cover";
 import {EventsService} from "../Events.service";
+import {NewProductPage} from "../new-product/new-product";
 
 /**
  * Generated class for the RegistrarPage page.
@@ -33,7 +34,7 @@ export class NewEventPage implements OnInit {
   }
   onSubmit(){
     this.eventsservice.postEvent(this.signupForm.value.name,this.signupForm.value.id);
-    this.navCtrl.push(CoverPage,{
+    this.navCtrl.push(NewProductPage,{
     });
     this.signupForm.reset();
   }
