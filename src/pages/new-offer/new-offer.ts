@@ -42,7 +42,7 @@ export class NewOfferPage implements OnInit {
     console.log(this.offer.products);
     console.log(this.offer.amounts);
 
-    if(this.offer!=null) {
+    if(this.offer.products!=[]) {
       this.eventsservice.addOfferEvent(this.eventsservice.getSelectedEvent(), this.offer);
     }
     else {
@@ -67,10 +67,9 @@ export class NewOfferPage implements OnInit {
     if(this.productin==false){
       if(this.offer.products!=null) {
         this.offer.products.push(product);
-        this.offer.amounts.push(1);
+        this.offer.amounts[0]=1
       }else{
         this.offer.products[0]=product;
-        this.offer.amounts[0]=1;
       }
 
     }

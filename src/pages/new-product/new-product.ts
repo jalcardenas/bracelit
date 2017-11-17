@@ -52,5 +52,4 @@ export class NewProductPage implements OnInit {
     this.navCtrl.push(NewOfferPage,{
     });
   }
-
 }

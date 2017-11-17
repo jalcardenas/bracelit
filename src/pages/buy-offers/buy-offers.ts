@@ -1,10 +1,8 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import { ShoppingCartService} from "../ShoppingCart.service";
 import { ProductModel } from "../Product.model";
 import { ShoppingCartPage} from "../shopping-cart/shopping-cart";
 import {OffersModel} from "../Offers.module";
-import { OffersService } from "../Offers.service";
 import {WristbandService} from "../Wristband.service";
 import {EventsService} from "../Events.service";
 
@@ -25,7 +23,6 @@ export class BuyOffersPage {
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
               private eventsservice: EventsService,
-              private shoppingcart:ShoppingCartService,
               private wristbandservice: WristbandService) {
   }
   offers: OffersModel[] = this.eventsservice.getOffers();

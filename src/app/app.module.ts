@@ -16,13 +16,11 @@ import { ShoppingCartPage } from "../pages/shopping-cart/shopping-cart"
 import { ShoppingCartService} from "../pages/ShoppingCart.service";
 import { RechargeBondsPage } from "../pages/recharge-bonds/recharge-bonds";
 import { BuyOffersPage } from "../pages/buy-offers/buy-offers";
-import {OffersService} from "../pages/Offers.service";
 import { HttpModule } from "@angular/http";
 import { CoverPage} from "../pages/cover/cover";
 import {NewEventPage} from "../pages/new-event/new-event";
 import { EventsService} from "../pages/Events.service";
 import {NewProductPage} from "../pages/new-product/new-product";
-import {NewOfferPageModule} from "../pages/new-offer/new-offer.module";
 import {NewOfferPage} from "../pages/new-offer/new-offer";
 
 @NgModule({
@@ -71,7 +69,6 @@ import {NewOfferPage} from "../pages/new-offer/new-offer";
     WristbandService,
     ProductsService,
     ShoppingCartService,
-    OffersService,
     EventsService
 
   ]
